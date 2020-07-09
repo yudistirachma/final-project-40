@@ -9,8 +9,8 @@
 | vote       | vote pertanyaan, vote jawaban                                                                                                                                                         | belum  | semua bagian |
 | reputasi   | kalkulasi reputasi dari hasil vote jawaban dan pertanyaan                                                                                                                             | belum  | semua bagian |
 
-## develope by
+## develop by
 
-yudistirachma https://https://github.com/yudistirachma
-badruti94 https://https://github.com/badruti94
-selinabuntara https://https://github.com/selinabuntara
+yudistirachma https://https://github.com/yudistirachma <br>
+badruti94 https://https://github.com/badruti94 <br>
+selinabuntara https://https://github.com/selinabuntara <br>
