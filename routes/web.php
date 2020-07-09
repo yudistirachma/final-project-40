@@ -1,6 +1,5 @@
 <?php
 
-use App\pertanyaan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// pertanyaan route
 Route::get('/', 'PertanyaanController@index');
 Route::get('/pertanyaan/create', 'PertanyaanController@create');
 Route::get('/pertanyaan/{$id}', 'PertanyaanController@detail');

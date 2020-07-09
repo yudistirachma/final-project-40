@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pertanyaan;
+use Illuminate\Support\Facades\Auth;
 
 class PertanyaanController extends Controller
 {
@@ -13,7 +14,8 @@ class PertanyaanController extends Controller
     }
     public function index()
     {
-        $data =  Pertanyaan::all();
+        $data =  Pertanyaan::paginate(5);
+        // dd($data);
         return view('index', compact('data'));
     }
     public function create()
