@@ -16,7 +16,7 @@ class CreateJawabanTable extends Migration
         Schema::create('jawaban', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('isi');
-            $table->int('users_id');
+            $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
         });

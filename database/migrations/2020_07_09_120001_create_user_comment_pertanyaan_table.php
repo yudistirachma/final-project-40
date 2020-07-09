@@ -16,9 +16,9 @@ class CreateUserCommentPertanyaanTable extends Migration
         Schema::create('user_comment_pertanyaan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('isi');
-            $table->int('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->int('pertanyaan_id');
+            $table->unsignedBigInteger('pertanyaan_id');
             $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan');
             $table->timestamps();
         });

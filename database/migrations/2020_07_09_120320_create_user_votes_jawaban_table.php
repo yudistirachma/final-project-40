@@ -15,10 +15,10 @@ class CreateUserVotesJawabanTable extends Migration
     {
         Schema::create('user_votes_jawaban', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->int('nilai_vote');
-            $table->int('user_id');
+            $table->integer('nilai_vote');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->int('jawaban_id');
+            $table->unsignedBigInteger('jawaban_id');
             $table->foreign('jawaban_id')->references('id')->on('jawaban');
             $table->timestamps();
         });

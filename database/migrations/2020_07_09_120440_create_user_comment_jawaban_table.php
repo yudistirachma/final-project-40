@@ -16,9 +16,9 @@ class CreateUserCommentJawabanTable extends Migration
         Schema::create('user_comment_jawaban', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('isi');
-            $table->int('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->int('jawaban_id');
+            $table->unsignedBigInteger('jawaban_id');
             $table->foreign('jawaban_id')->references('id')->on('jawaban');
             $table->timestamps();
         });

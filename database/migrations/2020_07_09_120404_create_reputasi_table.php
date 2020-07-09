@@ -15,8 +15,8 @@ class CreateReputasiTable extends Migration
     {
         Schema::create('reputasi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->int('poin');
-            $table->int('user_id');
+            $table->integer('poin');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

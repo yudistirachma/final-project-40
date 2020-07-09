@@ -15,11 +15,11 @@ class CreateUserVotesPertanyaanTable extends Migration
     {
         Schema::create('user_votes_pertanyaan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->int('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->int('pertanyaan_id');
+            $table->unsignedBigInteger('pertanyaan_id');
             $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan');
-            $table->int('nilai_vote');
+            $table->integer('nilai_vote');
             $table->timestamps();
         });
     }

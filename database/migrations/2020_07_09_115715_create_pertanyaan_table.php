@@ -18,8 +18,8 @@ class CreatePertanyaanTable extends Migration
             $table->string('judul');
             $table->string('isi');
             $table->string('tag')->nullable();
-            $table->int('jawaban_tepat_id')->nullable();
-            $table->int('users_id');
+            $table->integer('jawaban_tepat_id')->nullable();
+            $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
         });
