@@ -1,5 +1,6 @@
 <?php
 
+use App\pertanyaan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,10 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'PertanyaanController@index');
+Route::get('/pertanyaan/create', 'PertanyaanController@create');
+Route::get('/pertanyaan/{$id}', 'PertanyaanController@detail');
+
+Route::post('/pertnyaan/{$id}', 'PertanyaanController@update');
+Route::delete('/pertanyaan/{$id}', 'PertanyaanController@destroy');
+
 
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
