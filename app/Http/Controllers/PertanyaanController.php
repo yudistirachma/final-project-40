@@ -23,11 +23,26 @@ class PertanyaanController extends Controller
     public function detail($id)
     {
         $data = Pertanyaan::find($id);
+        return view('pertanyaan.detail', compact($data));
     }
-    public function update()
+    public function edit($id)
     {
+        $data = Pertanyaan::find($id);
+        return view('pertanyaan.edit', compact('data'));
     }
-    public function destroy()
+    public function update(Request $request, $id)
     {
+        Pertanyaan::where('id', $id)->update($request->all());
+        return redirect('/pertanyaan/' . $id);
+    }
+    public function store()
+    {
+        Pertanyaan::create(request()->all());
+        return redirect('/');
+    }
+    public function destroy($id)
+    {
+        Pertanyaan::destroy($id);
+        return back();
     }
 }
