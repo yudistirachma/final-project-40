@@ -29,4 +29,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/jawaban','JawabanController');
+//create, store, index, show, edit, update, delete
+Route::get('/jawaban/create/{pertanyaan_id}','JawabanController@create');
+Route::post('/jawaban','JawabanController@store');
+Route::get('/jawaban/{pertanyaan_id}/edit','JawabanController@edit');
+Route::put('/jawaban/{pertanyaan_id}','JawabanController@update');
+Route::delete('/jawaban/{pertanyaan_id}','JawabanController@destroy');
+
+Route::post('/jawaban/store_komentar','JawabanController@storeKomentar');
+
+Route::get('/jawaban/upvote/{jawaban_id}','JawabanController@upVote');
+Route::get('/jawaban/downvote/{jawaban_id}','JawabanController@downVote');

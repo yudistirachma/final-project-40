@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Jawaban;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class JawabanController extends Controller
 {
@@ -26,9 +29,10 @@ class JawabanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        
+        return $id;
+        //return view('jawaban.create', compact('id'));
     }
 
     /**
@@ -64,7 +68,8 @@ class JawabanController extends Controller
     {
         $data = Jawaban::find($id);
 
-        return view('jawaban.edit');
+        //return view('jawaban.edit', compact('data'));
+        return $data;
     }
 
     /**
@@ -89,6 +94,79 @@ class JawabanController extends Controller
     public function destroy($id)
     {
         Jawaban::destroy($id);
+        return redirect('/');
+    }
+
+    public function createKomentar($id)
+    {
+        $data = Jawaban::find($id);
+        return view('jawaban.form_komentar');
+    }
+
+    public function storeKomentar(Request $request)
+    {
+        DB::table('user_comment_jawaban')->insert($request->all());
+        return redirect('/');
+    }
+
+    public function upVote($id)
+    {
+        DB::table('user_votes_jawaban')->insert([
+            'user_id' => Auth::user()->id,
+            'jawaban_id' => $id,
+            'nilai_vote' => '1'
+        ]);
+
+
+        $users_id = Jawaban::find($id)->users_id;
+
+        $rep = DB::table('reputasi')->where('user_id', $users_id)->first();
+
+
+
+        if (!$rep) {
+            $rep = DB::table('reputasi')->insert([
+                'poin' => '0',
+                'user_id' => $users_id
+            ]);
+        }
+
+        DB::table('reputasi')->where('user_id', $users_id)->update([
+            'poin' => $rep->poin + 10
+        ]);
+
+        return redirect('/');
+    }
+
+
+    public function downVote($id)
+    {
+        DB::table('user_votes_jawaban')->insert([
+            'user_id' => '1',
+            'jawaban_id' => $id,
+            'nilai_vote' => '0'
+        ]);
+
+
+        $users_id = Auth::user()->id;
+
+        $rep = DB::table('reputasi')->where('user_id', $users_id)->first();
+
+        if (!$rep) {
+            $rep = DB::table('reputasi')->insert([
+                'poin' => '0',
+                'user_id' => $users_id
+            ]);
+        }
+
+        if ($rep->poin >= 15) {
+            DB::table('reputasi')->where('user_id', $users_id)->update([
+                'poin' => $rep->poin - 1
+            ]);
+        }
+
+
+
         return redirect('/');
     }
 }
