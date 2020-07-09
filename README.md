@@ -12,5 +12,5 @@
 ## develop by
 
 yudistirachma https://https://github.com/yudistirachma <br>
-badruti94 https://https://github.com/badruti94 <br>
-selinabuntara https://https://github.com/selinabuntara <br>
+badruti94 https://github.com/badruti94 <br>
+selinabuntara https://github.com/selinabuntara <br>
