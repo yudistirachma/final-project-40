@@ -11,6 +11,6 @@
 
 ## develop by
 
-yudistirachma https://https://github.com/yudistirachma <br>
+yudistirachma https://github.com/yudistirachma <br>
 badruti94 https://github.com/badruti94 <br>
 selinabuntara https://github.com/selinabuntara <br>
