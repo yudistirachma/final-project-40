@@ -15,7 +15,7 @@
            <span class="badge badge-light">updated on : {{$data->updated_at->diffForHumans()}}</span>
         </div>
         <div>
-        <a href="">Jawab </a><a href="{{$data->id}}/komentar"> komentar</a>
+        <a href="{{ url('/jawaban/create/' . $data->id) }}">Jawab </a><a href="{{$data->id}}/komentar"> komentar</a>
         </div>
     </div>
 </div>
@@ -34,6 +34,12 @@
     <div class="card-footer">
         <div>
         <a href="{{url('/jawaban/'. $jwbn->id .'/komentar')}}"> komentar</a>
+        <a href="{{ url('/jawaban/' .$jwbn->id. '/edit') }}">edit</a>
+            <form action="{{ url('/jawaban/' . $jwbn->id) }}" method="post" style="display: inline;">
+                @csrf
+                @method('delete')
+                <button class="btn btn-danger" type="submit">hapus</button>
+            </form>
         </div>
     </div>
 </div>
