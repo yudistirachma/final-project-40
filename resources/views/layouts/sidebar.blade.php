@@ -28,7 +28,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/pertanyaan') }}">
+        <a class="nav-link" href="{{ url('/') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Pertanyaan</span></a>
     </li>
