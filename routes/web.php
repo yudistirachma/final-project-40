@@ -43,6 +43,7 @@ Route::delete('/jawaban/{jawaban_id}', 'JawabanController@destroy');
 
 
 //Komentar Jawaban
+Route::get('/jawaban/{id}/komentar', 'JawabanController@indexKomentar');
 Route::get('/jawaban/create_komentar/{jawaban_id}', 'JawabanController@createKomentar');
 Route::post('/jawaban/store_komentar', 'JawabanController@storeKomentar');
 Route::get('/jawaban/edit_komentar/{jawaban_id}/{komentar_id}', 'JawabanController@editKomentar');

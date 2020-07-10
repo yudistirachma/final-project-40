@@ -23,7 +23,7 @@ class JawabanController extends Controller
      */
     public function index()
     {
-        return Jawaban::all()->komentar;
+        
     }
 
     /**
@@ -47,7 +47,7 @@ class JawabanController extends Controller
     public function store(Request $request)
     {
         Jawaban::create($request->all());
-        return redirect('/');
+        return redirect('/pertanyaan/' . $request->pertanyaan_id);
     }
 
     /**
@@ -86,7 +86,7 @@ class JawabanController extends Controller
     {
         $data = $request->except(['_token', '_method']);
         Jawaban::where('id', $id)->update($data);
-        return redirect('/');
+        return redirect('/pertanyaan/' . $request->pertanyaan_id);
     }
 
     /**
@@ -98,10 +98,16 @@ class JawabanController extends Controller
     public function destroy($id)
     {
         Jawaban::destroy($id);
-        return redirect('/');
+        return redirect()->back();
     }
 
     //KOMENTAR JAWABAN
+
+    public function indexKomentar($id)
+    {
+        $data = KomentarJawaban::with(['jawaban', 'user'])->where('jawaban_id', $id)->get();
+        return view('jawaban.komentar.index', compact('data'));
+    }
     public function createKomentar($id)
     {
         $users_id = Auth::user()->id;
