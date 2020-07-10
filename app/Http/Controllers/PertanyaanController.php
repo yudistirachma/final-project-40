@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jawaban;
 use Illuminate\Http\Request;
 use App\Pertanyaan;
 use Illuminate\Support\Facades\Auth;
@@ -25,8 +26,9 @@ class PertanyaanController extends Controller
     public function detail($id)
     {
         $data = Pertanyaan::find($id);
+        $jawaban = Jawaban::with(['user'])->where('pertanyaan_id', $id)->get();
         // dd($data);
-        return view('pertanyaan.detail', compact('data'));
+        return view('pertanyaan.detail', compact('data','jawaban'));
     }
     public function edit($id)
     {

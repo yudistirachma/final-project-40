@@ -14,4 +14,9 @@ class Jawaban extends Model
         return $this->hasMany('App\KomentarJawaban');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User','users_id');
+    }
+
 }
