@@ -14,7 +14,7 @@ class JawabanController extends Controller
 
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -32,8 +32,9 @@ class JawabanController extends Controller
      */
     public function create($id)
     {
-        return $id;
-        //return view('jawaban.create', compact('id'));
+        //return $id;
+        $users_id = Auth::user()->id;
+        return view('jawaban.create', compact('id','users_id'));
     }
 
     /**
@@ -69,8 +70,8 @@ class JawabanController extends Controller
     {
         $data = Jawaban::find($id);
 
-        //return view('jawaban.edit', compact('data'));
-        return $data;
+        return view('jawaban.edit', compact('data'));
+        //return $data;
     }
 
     /**
@@ -82,7 +83,8 @@ class JawabanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Jawaban::where('id', $id)->update($request->all());
+        $data = $request->except(['_token', '_method']);
+        Jawaban::where('id', $id)->update($data);
         return redirect('/');
     }
 
@@ -98,10 +100,12 @@ class JawabanController extends Controller
         return redirect('/');
     }
 
+    //KOMENTAR JAWABAN
     public function createKomentar($id)
     {
+        $users_id = Auth::user()->id;
         $data = Jawaban::find($id);
-        return view('jawaban.form_komentar');
+        return view('jawaban.komentar.create', compact('data', 'users_id'));
 
     }
 
@@ -113,14 +117,14 @@ class JawabanController extends Controller
 
     public function editKomentar($jawaban_id, $komentar_id)
     {
-        $data = Jawaban::find($jawaban_id);
-        //return view('jawaban.edit_komentar', compact('data','komentar_id'));
-        return compact('data','komentar_id');
+        $users_id = Auth::user()->id;
+        return view('jawaban.komentar.edit', compact('jawaban_id','komentar_id', 'users_id'));
     }
 
     public function updateKomentar(Request $request, $id)
     {
-        KomentarJawaban::where('id', $id)->update($request->all());
+        $data = $request->except(['_token', '_method']);
+        KomentarJawaban::where('id', $id)->update($data);
         return redirect('/');
     }
 
@@ -130,6 +134,7 @@ class JawabanController extends Controller
         return redirect('/');
     }
 
+    //VOTE JAWABAN
     public function upVote($id)
     {
         DB::table('user_votes_jawaban')->insert([
