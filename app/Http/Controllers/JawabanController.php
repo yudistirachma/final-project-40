@@ -23,6 +23,7 @@ class JawabanController extends Controller
      */
     public function index()
     {
+        return Jawaban::all()->komentar;
     }
 
     /**
@@ -118,7 +119,8 @@ class JawabanController extends Controller
     public function editKomentar($jawaban_id, $komentar_id)
     {
         $users_id = Auth::user()->id;
-        return view('jawaban.komentar.edit', compact('jawaban_id','komentar_id', 'users_id'));
+        $data = KomentarJawaban::find($komentar_id);
+        return view('jawaban.komentar.edit', compact('jawaban_id','data', 'users_id'));
     }
 
     public function updateKomentar(Request $request, $id)
@@ -195,4 +197,5 @@ class JawabanController extends Controller
 
         return redirect('/');
     }
+
 }

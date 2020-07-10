@@ -30,6 +30,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Jawaban
+Route::get('/jawaban', 'JawabanController@index');
 Route::get('/jawaban/create/{pertanyaan_id}', 'JawabanController@create');
 Route::post('/jawaban', 'JawabanController@store');
 Route::get('/jawaban/{jawaban_id}/edit', 'JawabanController@edit');
