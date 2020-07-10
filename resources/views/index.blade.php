@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-6">
         <h1 class="h3 mb-4 text-gray-800">All Pertanyaan</h1>
-        <a href="/pertanyaan/create" class="btn btn-primary">buat pertanyaan</a>
+        <a href="/pertanyaan/create" class="btn btn-primary mb-4">buat pertanyaan</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -26,14 +26,16 @@
                             <form action="/pertanyaan/{{$d->id}}" method="post" style="display: inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger">hapus</button>
+                                <button type="submit" class="btn btn-danger">hapus</button>
                             </form>
                         </td>
                     </tr>
         @endforeach
                 </tbody>
             </table>
-            {{$data}}
+            <div>
+                {{$data->links()}}
+            </div>
     </div>
 </div>
 

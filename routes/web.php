@@ -20,7 +20,7 @@ Route::get('/pertanyaan/create', 'PertanyaanController@create');
 Route::get('/pertanyaan/{$id}', 'PertanyaanController@detail');
 Route::get('/pertanyaan/{$id}/edit', 'PertanyaanController@edit');
 Route::put('/pertanyaan/{$id}', 'PertanyaanController@update');
-Route::post('/pertnyaan/{$id}', 'PertanyaanController@store');
+Route::post('/pertanyaan', 'PertanyaanController@store');
 Route::delete('/pertanyaan/{$id}', 'PertanyaanController@destroy');
 
 
@@ -29,4 +29,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/jawaban','JawabanController');
+Route::resource('/jawaban', 'JawabanController');

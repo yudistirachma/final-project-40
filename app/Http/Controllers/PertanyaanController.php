@@ -39,7 +39,9 @@ class PertanyaanController extends Controller
     }
     public function store()
     {
-        Pertanyaan::create(request()->all());
+        $data = request()->all();
+        $data["users_id"] = Auth::user()->id;
+        Pertanyaan::create($data);
         return redirect('/');
     }
     public function destroy($id)
