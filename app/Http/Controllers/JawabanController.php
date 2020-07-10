@@ -107,7 +107,7 @@ class JawabanController extends Controller
     public function indexKomentar($id)
     {
         $data = KomentarJawaban::with(['jawaban', 'user'])->where('jawaban_id', $id)->get();
-        return view('jawaban.komentar.index', compact('data'));
+        return view('jawaban.komentar.index', compact('data','id'));
     }
     public function createKomentar($id)
     {
