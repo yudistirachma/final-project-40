@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 // pertanyaan route
 Route::get('/', 'PertanyaanController@index');
 Route::get('/pertanyaan/create', 'PertanyaanController@create');
-Route::get('/pertanyaan/{$id}', 'PertanyaanController@detail');
-Route::get('/pertanyaan/{$id}/edit', 'PertanyaanController@edit');
-Route::put('/pertanyaan/{$id}', 'PertanyaanController@update');
+Route::get('/pertanyaan/{id}', 'PertanyaanController@detail');
+Route::get('/pertanyaan/{id}/edit', 'PertanyaanController@edit');
+Route::put('/pertanyaan/{id}', 'PertanyaanController@update');
 Route::post('/pertanyaan', 'PertanyaanController@store');
-Route::delete('/pertanyaan/{$id}', 'PertanyaanController@destroy');
+Route::delete('/pertanyaan/{id}', 'PertanyaanController@destroy');
 
 
 Auth::routes();
