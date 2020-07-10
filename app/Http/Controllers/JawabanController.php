@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jawaban;
+use App\KomentarJawaban;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -101,11 +102,31 @@ class JawabanController extends Controller
     {
         $data = Jawaban::find($id);
         return view('jawaban.form_komentar');
+
     }
 
     public function storeKomentar(Request $request)
     {
-        DB::table('user_comment_jawaban')->insert($request->all());
+        KomentarJawaban::create($request->all());
+        return redirect('/');
+    }
+
+    public function editKomentar($jawaban_id, $komentar_id)
+    {
+        $data = Jawaban::find($jawaban_id);
+        //return view('jawaban.edit_komentar', compact('data','komentar_id'));
+        return compact('data','komentar_id');
+    }
+
+    public function updateKomentar(Request $request, $id)
+    {
+        KomentarJawaban::where('id', $id)->update($request->all());
+        return redirect('/');
+    }
+
+    public function destroyKomentar($id)
+    {
+        KomentarJawaban::destroy($id);
         return redirect('/');
     }
 

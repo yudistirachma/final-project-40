@@ -36,7 +36,11 @@ Route::get('/jawaban/{pertanyaan_id}/edit', 'JawabanController@edit');
 Route::put('/jawaban/{pertanyaan_id}', 'JawabanController@update');
 Route::delete('/jawaban/{pertanyaan_id}', 'JawabanController@destroy');
 
+Route::get('/jawaban/create_komentar/{jawaban_id}', 'JawabanController@createKomentar');
 Route::post('/jawaban/store_komentar', 'JawabanController@storeKomentar');
+Route::get('/jawaban/edit_komentar/{jawaban_id}/{komentar_id}', 'JawabanController@editKomentar');
+Route::put('/jawaban/update_komentar/{komentar_id}', 'JawabanController@updateKomentar');
+Route::delete('/jawaban/destroy_komentar/{id}', 'JawabanController@destroyKomentar');
 
 Route::get('/jawaban/upvote/{jawaban_id}', 'JawabanController@upVote');
 Route::get('/jawaban/downvote/{jawaban_id}', 'JawabanController@downVote');
