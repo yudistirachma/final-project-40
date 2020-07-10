@@ -101,7 +101,8 @@ class JawabanController extends Controller
         return redirect()->back();
     }
 
-    //KOMENTAR JAWABAN
+
+    //KOMENTAR JAWABAN ###############################################################################################################################
 
     public function indexKomentar($id)
     {
@@ -119,7 +120,7 @@ class JawabanController extends Controller
     public function storeKomentar(Request $request)
     {
         KomentarJawaban::create($request->all());
-        return redirect('/');
+        return redirect('/jawaban/'. $request->jawaban_id .'/komentar');
     }
 
     public function editKomentar($jawaban_id, $komentar_id)
@@ -133,13 +134,14 @@ class JawabanController extends Controller
     {
         $data = $request->except(['_token', '_method']);
         KomentarJawaban::where('id', $id)->update($data);
-        return redirect('/');
+        
+        return redirect('/jawaban/'. $request->jawaban_id .'/komentar');
     }
 
     public function destroyKomentar($id)
     {
         KomentarJawaban::destroy($id);
-        return redirect('/');
+        return redirect()->back();
     }
 
     //VOTE JAWABAN
