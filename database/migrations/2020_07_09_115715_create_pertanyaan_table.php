@@ -20,7 +20,7 @@ class CreatePertanyaanTable extends Migration
             $table->string('tag')->nullable();
             $table->integer('jawaban_tepat_id')->nullable();
             $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

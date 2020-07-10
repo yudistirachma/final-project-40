@@ -17,9 +17,9 @@ class CreateUserCommentJawabanTable extends Migration
             $table->bigIncrements('id');
             $table->string('isi');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('jawaban_id');
-            $table->foreign('jawaban_id')->references('id')->on('jawaban');
+            $table->foreign('jawaban_id')->references('id')->on('jawaban')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
