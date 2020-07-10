@@ -23,10 +23,14 @@ Route::put('/pertanyaan/{id}', 'PertanyaanController@update');
 Route::post('/pertanyaan', 'PertanyaanController@store');
 Route::delete('/pertanyaan/{id}', 'PertanyaanController@destroy');
 
+// komentar pertanyaan route
+Route::get('/pertanyaan/{id}/komentar', 'KomentarPertanyaanController@index');
+Route::get('/pertanyaan/{id}/komentar/edit/{komenId}', 'KomentarPertanyaanController@edit');
+Route::post('/pertanyaan/{id}/komentar', 'KomentarPertanyaanController@store');
+Route::put('/pertanyaan/{id}/komentar/{komenId}', 'KomentarPertanyaanController@update');
+Route::delete('/pertanyaan/{id}/komentar/{komenId}', 'KomentarPertanyaanController@delete');
 
 Auth::routes();
-
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Jawaban
