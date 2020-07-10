@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @section('title', 'komentar jawaban')
 @section('content')
+
+
+@if(!$data->first())
+<h2>Belum Ada Komentar</h2>
+@else
 <h2>{{$data[0]->jawaban->isi}}</h2>
 <a href="{{ url('/jawaban/create_komentar/' . $data[0]->jawaban->id) }}">tambah komentar</a>
 @foreach ($data as $d)
@@ -26,4 +31,6 @@
     </div>
 </div>
 @endforeach
+@endif
+
 @endsection

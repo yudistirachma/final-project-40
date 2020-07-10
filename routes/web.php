@@ -50,5 +50,6 @@ Route::get('/jawaban/edit_komentar/{jawaban_id}/{komentar_id}', 'JawabanControll
 Route::put('/jawaban/update_komentar/{komentar_id}', 'JawabanController@updateKomentar');
 Route::delete('/jawaban/destroy_komentar/{id}', 'JawabanController@destroyKomentar');
 
-Route::get('/jawaban/upvote/{jawaban_id}', 'JawabanController@upVote');
-Route::get('/jawaban/downvote/{jawaban_id}', 'JawabanController@downVote');
+//Vote
+Route::get('/jawaban/upvote/{pertanyaan_id}/{jawaban_id}', 'VoteController@upVote');
+Route::get('/jawaban/downvote/{pertanyaan_id}/{jawaban_id}', 'VoteController@downVote');
