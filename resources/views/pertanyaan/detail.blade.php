@@ -60,6 +60,8 @@
                 @method('delete')
                 <button class="btn btn-danger" type="submit">hapus</button>
             </form>
+            <a href="{{ url('/jawaban/upvote/' . $data->id . '/' . $jwbn->id) }}" class="badge badge-primary">up vote</a>
+            <a href="{{ url('/jawaban/downvote/' . $data->id . '/' . $jwbn->id) }}" class="badge badge-danger">down vote</a>
             <a class="text text-success" href="{{ url('/pertanyaan/jawaban_tepat/' . $data->id . '/' . $jwbn->id) }}">pilih sebagai jawaban paling tepat</a>
         </div>
     </div>

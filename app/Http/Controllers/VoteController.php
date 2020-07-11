@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jawaban;
+use App\VoteJawaban;
 use App\VotePertanyaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,11 +14,11 @@ class VoteController extends Controller
     //VOTE JAWABAN
     public function upVote($pertanyaan_id, $id)
     {
-        DB::table('user_votes_jawaban')->insert([
-            'user_id' => Auth::user()->id,
-            'jawaban_id' => $id,
-            'nilai_vote' => '1'
-        ]);
+        $ada = VoteJawaban::where(['jawaban_id' => $id, 'user_id' => Auth::user()->id])->first();
+        VoteJawaban::updateOrCreate(
+            ['jawaban_id' => $id, 'user_id' => Auth::user()->id],
+            ['nilai_vote' => '1']
+        );
 
 
         $users_id = Jawaban::find($id)->users_id;
@@ -25,19 +26,24 @@ class VoteController extends Controller
         $rep = DB::table('reputasi')->where('user_id', $users_id)->first();
 
 
-
         if (!$rep) {
             $rep = DB::table('reputasi')->insert([
                 'poin' => '0',
                 'user_id' => $users_id
             ]);
+            $rep_poin = 0;
+        } else {
+            $rep_poin = $rep->poin;
         }
 
 
 
-        DB::table('reputasi')->where('user_id', $users_id)->update([
-            'poin' => $rep->poin + 10
-        ]);
+        if (!$ada) {
+            DB::table('reputasi')->where('user_id', $users_id)->update([
+                'poin' => $rep_poin + 10
+            ]);
+        }
+
 
         return redirect('/pertanyaan/' . $pertanyaan_id);
     }
@@ -45,13 +51,6 @@ class VoteController extends Controller
 
     public function downVote($pertanyaan_id, $id)
     {
-        DB::table('user_votes_jawaban')->insert([
-            'user_id' => Auth::user()->id,
-            'jawaban_id' => $id,
-            'nilai_vote' => '0'
-        ]);
-
-
         $users_id = Auth::user()->id;
 
         $rep = DB::table('reputasi')->where('user_id', $users_id)->first();
@@ -61,9 +60,17 @@ class VoteController extends Controller
                 'poin' => '0',
                 'user_id' => $users_id
             ]);
+            $rep_poin = 0;
+        } else {
+            $rep_poin = $rep->poin;
         }
 
-        if ($rep->poin >= 15) {
+        if ($rep_poin >= 15) {
+            VoteJawaban::updateOrCreate(
+                ['jawaban_id' => $id, 'user_id' => Auth::user()->id],
+                ['nilai_vote' => '0']
+            );
+
             DB::table('reputasi')->where('user_id', $users_id)->update([
                 'poin' => $rep->poin - 1
             ]);
