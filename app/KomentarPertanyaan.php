@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class KomentarPertanyaan extends Model
 {
-    protected $guard = [];
+    protected $guarded = [];
     protected $table = 'user_comment_pertanyaan';
 
     public function pertanyaan()
