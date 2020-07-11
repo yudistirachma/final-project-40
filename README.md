@@ -7,7 +7,7 @@
 | jawaban    | input jawaban berdasarkan pertanyaan, di munculkan di bawah pada detail pertanyaan, edit jawaban, hapus jawaban                                                                       | selesai          |                    |
 | komentar   | input komentar untuk pertanyaan, input komentar untuk jawaban, edit komentar pada pertanyaan, edit komentar pada jawaban, hapus komentar pada pertanyaan, hapus komentar pada jawaban | selesai          |                    |
 | vote       | vote pertanyaan, vote jawaban                                                                                                                                                         | selesai          |                    |
-| reputasi   | kalkulasi reputasi dari hasil vote jawaban dan pertanyaan                                                                                                                             | belum            | semua bagian       |
+| reputasi   | kalkulasi reputasi dari hasil vote jawaban dan pertanyaan                                                                                                                             | selesai          |                    |
 
 ## develop by
 
