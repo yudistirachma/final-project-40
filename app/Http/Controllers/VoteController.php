@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jawaban;
+use App\pertanyaan;
 use App\VoteJawaban;
 use App\VotePertanyaan;
 use Illuminate\Http\Request;
@@ -86,15 +87,59 @@ class VoteController extends Controller
         $users_id = Auth::user()->id;
 
         if ($vote == "true") {
+            $ada = VotePertanyaan::where(['pertanyaan_id' => $pertanyaan_id, 'user_id' => $users_id])->first();
+
             VotePertanyaan::updateOrCreate(
                 ['pertanyaan_id' => $pertanyaan_id, 'user_id' => $users_id],
                 ['nilai_vote' => 1]
             );
+
+            $pembuat_id = pertanyaan::find($pertanyaan_id)->users_id;
+
+            $rep = DB::table('reputasi')->where('user_id', $pembuat_id)->first();
+
+            if (!$rep) {
+                $rep = DB::table('reputasi')->insert([
+                    'poin' => '0',
+                    'user_id' => $pembuat_id
+                ]);
+                $rep_poin = 0;
+            } else {
+                $rep_poin = $rep->poin;
+            }
+
+
+
+            if (!$ada) {
+                DB::table('reputasi')->where('user_id', $pembuat_id)->update([
+                    'poin' => $rep_poin + 10
+                ]);
+            }
         } else {
-            VotePertanyaan::updateOrCreate(
-                ['pertanyaan_id' => $pertanyaan_id, 'user_id' => $users_id],
-                ['nilai_vote' => -1]
-            );
+            $rep = DB::table('reputasi')->where('user_id', $users_id)->first();
+
+            if (!$rep) {
+                $rep = DB::table('reputasi')->insert([
+                    'poin' => '0',
+                    'user_id' => $users_id
+                ]);
+                $rep_poin = 0;
+            } else {
+                $rep_poin = $rep->poin;
+            }
+
+            if ($rep_poin >= 15) {
+                VotePertanyaan::updateOrCreate(
+                    ['pertanyaan_id' => $pertanyaan_id, 'user_id' => $users_id],
+                    ['nilai_vote' => -1]
+                );
+
+                DB::table('reputasi')->where('user_id', $users_id)->update([
+                    'poin' => $rep->poin - 1
+                ]);
+            }
+
+            
         }
 
         return redirect('/pertanyaan/' . $pertanyaan_id);

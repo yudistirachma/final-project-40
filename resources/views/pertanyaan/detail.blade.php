@@ -6,8 +6,8 @@
     <div class="card-header">
         <h5 class="card-title">{{$data->judul}}</h5>
         <p class="card-text">
-            <a href="/pertanyaan/vote/{{$data->id}}/true" class="badge badge-primary">up vote</a>
-            <a href="/pertanyaan/vote/{{$data->id}}/false" class="badge badge-danger">down vote</a>
+            <a href="/pertanyaan/vote/{{$data->id}}/true" class="badge badge-primary">up vote</a> <small>{{ $voteScorePlus ?? '' }}</small>
+            <a href="/pertanyaan/vote/{{$data->id}}/false" class="badge badge-danger">down vote</a> <small>{{ $voteScoreMinus ?? '' }}</small>
             Score Vote : {{$voteScore}}
         </p>
     </div>
@@ -60,8 +60,8 @@
                 @method('delete')
                 <button class="btn btn-danger" type="submit">hapus</button>
             </form>
-            <a href="{{ url('/jawaban/upvote/' . $data->id . '/' . $jwbn->id) }}" class="badge badge-primary">up vote</a>
-            <a href="{{ url('/jawaban/downvote/' . $data->id . '/' . $jwbn->id) }}" class="badge badge-danger">down vote</a>
+            <a href="{{ url('/jawaban/upvote/' . $data->id . '/' . $jwbn->id) }}" class="badge badge-primary">up vote</a> <small>{{ $voteScoreJawaban[$loop->index]->up ?? '' }}</small>
+            <a href="{{ url('/jawaban/downvote/' . $data->id . '/' . $jwbn->id) }}" class="badge badge-danger">down vote</a> <small>{{ $voteScoreJawaban[$loop->index]->down ?? '' }}</small>
             <a class="text text-success" href="{{ url('/pertanyaan/jawaban_tepat/' . $data->id . '/' . $jwbn->id) }}">pilih sebagai jawaban paling tepat</a>
         </div>
     </div>

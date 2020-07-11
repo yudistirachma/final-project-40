@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Pertanyaan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class PertanyaanController extends Controller
 {
@@ -32,9 +33,21 @@ class PertanyaanController extends Controller
         $voteScorePlus = DB::table('user_votes_pertanyaan')->where('pertanyaan_id', $id)->where('nilai_vote', 1)->count();
         $voteScoreMinus = DB::table('user_votes_pertanyaan')->where('pertanyaan_id', $id)->where('nilai_vote', -1)->count();
         $voteScore = $voteScorePlus - $voteScoreMinus;
+
+        $voteScoreJawaban_jawaban_id = DB::table('user_votes_jawaban')->select('jawaban_id')->groupBy('jawaban_id')->get();
+        $voteScoreJawaban = [];
+
+        foreach($voteScoreJawaban_jawaban_id as $vtj){
+            $scoreJwb = new stdClass();
+            $scoreJwb->up = DB::table('user_votes_jawaban')->where('jawaban_id', $vtj->jawaban_id)->where('nilai_vote',1)->count();
+            $scoreJwb->down = DB::table('user_votes_jawaban')->where('jawaban_id', $vtj->jawaban_id)->where('nilai_vote',0)->count();
+
+            $voteScoreJawaban[] = $scoreJwb;
+        }
+
         // dd($voteScore);
         //dd($jawaban_tepat);
-        return view('pertanyaan.detail', compact('data', 'jawaban', 'voteScore', 'jawaban_tepat'));
+        return view('pertanyaan.detail', compact('data', 'jawaban', 'voteScore', 'jawaban_tepat', 'voteScoreJawaban', 'voteScorePlus', 'voteScoreMinus'));
     }
     public function edit($id)
     {
