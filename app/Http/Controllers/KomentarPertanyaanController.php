@@ -23,4 +23,9 @@ class KomentarPertanyaanController extends Controller
         KomentarPertanyaan::create($data);
         return back();
     }
+    public function destroy($komenId)
+    {
+        KomentarPertanyaan::destroy($komenId);
+        return back();
+    }
 }

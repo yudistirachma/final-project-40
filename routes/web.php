@@ -28,7 +28,7 @@ Route::get('/pertanyaan/{id}/komentar', 'KomentarPertanyaanController@index');
 Route::get('/pertanyaan/{id}/komentar/edit/{komenId}', 'KomentarPertanyaanController@edit');
 Route::post('/pertanyaan/{id}/komentar', 'KomentarPertanyaanController@store');
 Route::put('/pertanyaan/{id}/komentar/{komenId}', 'KomentarPertanyaanController@update');
-Route::delete('/pertanyaan/{id}/komentar/{komenId}', 'KomentarPertanyaanController@delete');
+Route::get('/pertanyaan/komentar/{komenId}', 'KomentarPertanyaanController@destroy');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

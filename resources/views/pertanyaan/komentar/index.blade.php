@@ -19,13 +19,14 @@
                 <span class="badge badge-pill badge-light">{{$d->user->name}}</span>
                 <p class="crad-text">{{$d->isi}}</p>
             <a href="/pertanyaan/{{$d->pertanyaan->id}}/komentar/edit/{{$d->id}}" class="card-link">Edit</a>
+            <a href="/pertanyaan/komentar/{{$d->id}}" class="card-link">hapus</a>
     @endforeach
         </ul>
     </div>
     <form action="/pertanyaan/{{$data[0]->pertanyaan->id}}/komentar" method="post" class=" mt-4">
         @csrf
         <div class="form-group">
-            <label for="komentar">komentar</label>
+            <label for="komentar">Tambah komentar</label>
             <textarea class="form-control" name="isi" id="komentar" rows="3"></textarea>
         </div>
         <input type="hidden" name="pertanyaan_id" value="{{$data[0]->pertanyaan->id}}">
