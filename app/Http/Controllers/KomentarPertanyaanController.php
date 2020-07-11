@@ -28,4 +28,20 @@ class KomentarPertanyaanController extends Controller
         KomentarPertanyaan::destroy($komenId);
         return back();
     }
+    public function edit($id, $komenId)
+    {
+        $data = KomentarPertanyaan::with(['pertanyaan', 'user'])->where('id', $komenId)->get();
+        // dd($data);
+        return view('pertanyaan.komentar.edit', compact('data'));
+    }
+    public function update($id, $komenId)
+    {
+        // dd($komenId);
+        // dd(request()->all());
+        $data = request()->all();
+        unset($data["_token"], $data["_method"]);
+        // dd($data);
+        KomentarPertanyaan::where('id', $komenId)->update($data);
+        return redirect('/pertanyaan/' . $id . '/komentar');
+    }
 }
