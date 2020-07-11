@@ -12,7 +12,7 @@
         </p>
     </div>
     <div class="card-body">
-        <p class="card-text">{{$data->isi}}</p>
+        <p class="card-text">{!!$data->isi!!}</p>
         <p class="card-text"><span class="badge badge-info">{{$data->tag}}</span></p>
     </div>
     <div class="card-footer">
@@ -49,7 +49,7 @@
         {{ $jwbn->user->name }}
     </div>
     <div class="card-body">
-        <p class="card-text">{{ $jwbn->isi }}</p>
+        <p class="card-text">{!! $jwbn->isi !!}</p>
     </div>
     <div class="card-footer">
         <div>

@@ -46,7 +46,7 @@ class VoteController extends Controller
     public function downVote($pertanyaan_id, $id)
     {
         DB::table('user_votes_jawaban')->insert([
-            'user_id' => '1',
+            'user_id' => Auth::user()->id,
             'jawaban_id' => $id,
             'nilai_vote' => '0'
         ]);

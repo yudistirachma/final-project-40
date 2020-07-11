@@ -7,7 +7,7 @@
 <h2>Belum Ada Komentar</h2>
 <a href="{{ url('/jawaban/create_komentar/' . $id) }}">tambah komentar</a>
 @else
-<h2>{{$data[0]->jawaban->isi}}</h2>
+<h2>{!!$data[0]->jawaban->isi!!}</h2>
 
 @foreach ($data as $d)
 <div class="card mb-4">

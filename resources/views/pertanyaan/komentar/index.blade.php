@@ -1,12 +1,17 @@
 @extends('layouts.master')
 @section('title', 'komentar jawaban')
 @section('content')
+
+@if(!$data->first())
+<h2>Belum Ada Komentar</h2>
+@else
+
     <div class="card mb-4">
         <div class="card-header">
             <h5 class="card-title">{{$data[0]->pertanyaan->judul}}</h5>
         </div>
         <div class="card-body">
-            <p class="card-text">{{$data[0]->pertanyaan->isi}}</p>
+            <p class="card-text">{!!$data[0]->pertanyaan->isi!!}</p>
         </div>
     </div>
     <div class="card">
@@ -23,13 +28,16 @@
     @endforeach
         </ul>
     </div>
-    <form action="/pertanyaan/{{$data[0]->pertanyaan->id}}/komentar" method="post" class=" mt-4">
+    @endif
+    <form action="/pertanyaan/{{ $id }}/komentar" method="post" class=" mt-4">
         @csrf
         <div class="form-group">
             <label for="komentar">Tambah komentar</label>
             <textarea class="form-control" name="isi" id="komentar" rows="3"></textarea>
         </div>
-        <input type="hidden" name="pertanyaan_id" value="{{$data[0]->pertanyaan->id}}">
+        <input type="hidden" name="pertanyaan_id" value="{{ $id }}">
         <button type="submit" class="btn btn-primary">kirim</button>
 </form>
+
+
 @endsection

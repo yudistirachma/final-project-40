@@ -19,7 +19,7 @@
         @foreach ($data as $d)        
                     <tr>
                         <td>{{$d->judul}}</td>
-                        <td>{{Str::limit($d->isi, 20)}}</td>
+                        <td>{!! Str::limit($d->isi, 20) !!}</td>
                         <td>
                             <a href="/pertanyaan/{{$d->id}}" class="btn btn-info">detail</a>
                             <a href="/pertanyaan/{{$d->id}}/edit" class="btn btn-warning">ubah</a>

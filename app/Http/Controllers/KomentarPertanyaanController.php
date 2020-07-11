@@ -12,7 +12,7 @@ class KomentarPertanyaanController extends Controller
     {
         $user = Auth::user()->id;
         $data = KomentarPertanyaan::with(['pertanyaan', 'user'])->where('pertanyaan_id', $id)->get();
-        return view('pertanyaan.komentar.index', compact('data', 'user'));
+        return view('pertanyaan.komentar.index', compact('data', 'user', 'id'));
     }
     public function store()
     {

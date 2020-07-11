@@ -56,3 +56,9 @@ Route::get('/jawaban/upvote/{pertanyaan_id}/{jawaban_id}', 'VoteController@upVot
 Route::get('/jawaban/downvote/{pertanyaan_id}/{jawaban_id}', 'VoteController@downVote');
 
 Route::get('/pertanyaan/vote/{pertanyaan_id}/{vote}', 'VoteController@votePertanyaan');
+
+
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
