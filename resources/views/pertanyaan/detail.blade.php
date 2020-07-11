@@ -32,7 +32,7 @@
 <div class="collapse" id="jawaban-tepat">
     <div class="card card-body">
         @if($jawaban_tepat)
-            {{ $jawaban_tepat->isi }}
+            {!! $jawaban_tepat->isi !!}
         @else
             {{ 'Belum ada jawaban tepat' }}
         @endif

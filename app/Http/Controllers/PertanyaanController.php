@@ -37,10 +37,10 @@ class PertanyaanController extends Controller
         $voteScoreJawaban_jawaban_id = DB::table('user_votes_jawaban')->select('jawaban_id')->groupBy('jawaban_id')->get();
         $voteScoreJawaban = [];
 
-        foreach($voteScoreJawaban_jawaban_id as $vtj){
+        foreach ($voteScoreJawaban_jawaban_id as $vtj) {
             $scoreJwb = new stdClass();
-            $scoreJwb->up = DB::table('user_votes_jawaban')->where('jawaban_id', $vtj->jawaban_id)->where('nilai_vote',1)->count();
-            $scoreJwb->down = DB::table('user_votes_jawaban')->where('jawaban_id', $vtj->jawaban_id)->where('nilai_vote',0)->count();
+            $scoreJwb->up = DB::table('user_votes_jawaban')->where('jawaban_id', $vtj->jawaban_id)->where('nilai_vote', 1)->count();
+            $scoreJwb->down = DB::table('user_votes_jawaban')->where('jawaban_id', $vtj->jawaban_id)->where('nilai_vote', 0)->count();
 
             $voteScoreJawaban[] = $scoreJwb;
         }
@@ -78,9 +78,28 @@ class PertanyaanController extends Controller
 
     public function pilihJawabanTepat($pertanyaan_id, $jawaban_id)
     {
-        Pertanyaan::where('id',$pertanyaan_id)->update([
+        $pembuat_id = Jawaban::find($jawaban_id)->users_id;
+
+        Pertanyaan::where('id', $pertanyaan_id)->update([
             'jawaban_tepat_id' => $jawaban_id
         ]);
+
+        $rep = DB::table('reputasi')->where('user_id', $pembuat_id)->first();
+
+        if (!$rep) {
+            $rep = DB::table('reputasi')->insert([
+                'poin' => '0',
+                'user_id' => $pembuat_id
+            ]);
+            $rep_poin = 0;
+        } else {
+            $rep_poin = $rep->poin;
+        }
+
+        DB::table('reputasi')->where('user_id', $pembuat_id)->update([
+            'poin' => $rep_poin + 15
+        ]);
+
 
         return back();
     }
