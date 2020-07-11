@@ -8,7 +8,7 @@
         <p class="card-text">
             <a href="/pertanyaan/vote/{{$data->id}}/true" class="badge badge-primary">up vote</a>
             <a href="/pertanyaan/vote/{{$data->id}}/false" class="badge badge-danger">down vote</a>
-             Score Vote : {{$voteScore}} 
+            Score Vote : {{$voteScore}}
         </p>
     </div>
     <div class="card-body">
@@ -22,6 +22,21 @@
         <div>
             <a class="text text-info" href="{{ url('/jawaban/create/' . $data->id) }}">Jawab </a><a class="text text-success" href="{{$data->id}}/komentar"> komentar</a>
         </div>
+    </div>
+</div>
+<p>
+    <a class="text text-primary" data-toggle="collapse" href="#jawaban-tepat" role="button" aria-expanded="false" aria-controls="jawaban-tepat">
+        Lihat Jawaban Tepat
+    </a>
+</p>
+<div class="collapse" id="jawaban-tepat">
+    <div class="card card-body">
+        @if($jawaban_tepat)
+            {{ $jawaban_tepat->isi }}
+        @else
+            {{ 'Belum ada jawaban tepat' }}
+        @endif
+
     </div>
 </div>
 
@@ -45,6 +60,7 @@
                 @method('delete')
                 <button class="btn btn-danger" type="submit">hapus</button>
             </form>
+            <a class="text text-success" href="{{ url('/pertanyaan/jawaban_tepat/' . $data->id . '/' . $jwbn->id) }}">pilih sebagai jawaban paling tepat</a>
         </div>
     </div>
 </div>

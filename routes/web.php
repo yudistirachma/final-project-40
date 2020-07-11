@@ -22,6 +22,7 @@ Route::get('/pertanyaan/{id}/edit', 'PertanyaanController@edit');
 Route::put('/pertanyaan/{id}', 'PertanyaanController@update');
 Route::post('/pertanyaan', 'PertanyaanController@store');
 Route::delete('/pertanyaan/{id}', 'PertanyaanController@destroy');
+Route::get('/pertanyaan/jawaban_tepat/{pertanyaan_id}/{jawaban_id}', 'PertanyaanController@pilihJawabanTepat');
 
 // komentar pertanyaan route
 Route::get('/pertanyaan/{id}/komentar', 'KomentarPertanyaanController@index');

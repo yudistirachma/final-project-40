@@ -28,11 +28,13 @@ class PertanyaanController extends Controller
     {
         $data = Pertanyaan::find($id);
         $jawaban = Jawaban::with(['user'])->where('pertanyaan_id', $id)->get();
+        $jawaban_tepat = Jawaban::where('id', $data->jawaban_tepat_id)->first();
         $voteScorePlus = DB::table('user_votes_pertanyaan')->where('pertanyaan_id', $id)->where('nilai_vote', 1)->count();
         $voteScoreMinus = DB::table('user_votes_pertanyaan')->where('pertanyaan_id', $id)->where('nilai_vote', -1)->count();
         $voteScore = $voteScorePlus - $voteScoreMinus;
         // dd($voteScore);
-        return view('pertanyaan.detail', compact('data', 'jawaban', 'voteScore'));
+        //dd($jawaban_tepat);
+        return view('pertanyaan.detail', compact('data', 'jawaban', 'voteScore', 'jawaban_tepat'));
     }
     public function edit($id)
     {
@@ -58,6 +60,15 @@ class PertanyaanController extends Controller
     public function destroy($id)
     {
         Pertanyaan::destroy($id);
+        return back();
+    }
+
+    public function pilihJawabanTepat($pertanyaan_id, $jawaban_id)
+    {
+        Pertanyaan::where('id',$pertanyaan_id)->update([
+            'jawaban_tepat_id' => $jawaban_id
+        ]);
+
         return back();
     }
 }
