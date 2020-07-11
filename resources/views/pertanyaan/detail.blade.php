@@ -4,7 +4,12 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        {{$data->judul}}
+        <h5 class="card-title">{{$data->judul}}</h5>
+        <p class="card-text">
+            <a href="/pertanyaan/vote/{{$data->id}}/true" class="badge badge-primary">up vote</a>
+            <a href="/pertanyaan/vote/{{$data->id}}/false" class="badge badge-danger">down vote</a>
+             Score Vote : {{$voteScore}} 
+        </p>
     </div>
     <div class="card-body">
         <p class="card-text">{{$data->isi}}</p>

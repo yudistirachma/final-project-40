@@ -36,11 +36,8 @@ class KomentarPertanyaanController extends Controller
     }
     public function update($id, $komenId)
     {
-        // dd($komenId);
-        // dd(request()->all());
         $data = request()->all();
         unset($data["_token"], $data["_method"]);
-        // dd($data);
         KomentarPertanyaan::where('id', $komenId)->update($data);
         return redirect('/pertanyaan/' . $id . '/komentar');
     }

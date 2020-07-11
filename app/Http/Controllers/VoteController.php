@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jawaban;
+use App\VotePertanyaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ class VoteController extends Controller
             ]);
         }
 
-        
+
 
         DB::table('reputasi')->where('user_id', $users_id)->update([
             'poin' => $rep->poin + 10
@@ -69,6 +70,25 @@ class VoteController extends Controller
         }
 
 
+
+        return redirect('/pertanyaan/' . $pertanyaan_id);
+    }
+
+    public function votePertanyaan($pertanyaan_id, $vote)
+    {
+        $users_id = Auth::user()->id;
+
+        if ($vote == "true") {
+            VotePertanyaan::updateOrCreate(
+                ['pertanyaan_id' => $pertanyaan_id, 'user_id' => $users_id],
+                ['nilai_vote' => 1]
+            );
+        } else {
+            VotePertanyaan::updateOrCreate(
+                ['pertanyaan_id' => $pertanyaan_id, 'user_id' => $users_id],
+                ['nilai_vote' => -1]
+            );
+        }
 
         return redirect('/pertanyaan/' . $pertanyaan_id);
     }

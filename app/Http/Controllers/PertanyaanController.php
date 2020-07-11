@@ -6,6 +6,7 @@ use App\Jawaban;
 use Illuminate\Http\Request;
 use App\Pertanyaan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PertanyaanController extends Controller
 {
@@ -27,8 +28,11 @@ class PertanyaanController extends Controller
     {
         $data = Pertanyaan::find($id);
         $jawaban = Jawaban::with(['user'])->where('pertanyaan_id', $id)->get();
-        // dd($data);
-        return view('pertanyaan.detail', compact('data','jawaban'));
+        $voteScorePlus = DB::table('user_votes_pertanyaan')->where('pertanyaan_id', $id)->where('nilai_vote', 1)->count();
+        $voteScoreMinus = DB::table('user_votes_pertanyaan')->where('pertanyaan_id', $id)->where('nilai_vote', -1)->count();
+        $voteScore = $voteScorePlus - $voteScoreMinus;
+        // dd($voteScore);
+        return view('pertanyaan.detail', compact('data', 'jawaban', 'voteScore'));
     }
     public function edit($id)
     {
