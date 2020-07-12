@@ -9,7 +9,7 @@
 | vote       | vote pertanyaan, vote jawaban                                                                                                                                                         | selesai          |                    |
 | reputasi   | kalkulasi reputasi dari hasil vote jawaban dan pertanyaan                                                                                                                             | selesai          |                    |
 
-##Cek for demo
+## Cek for demo
 http://hidden-river-97884.herokuapp.com
 
 ## develop by
