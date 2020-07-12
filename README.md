@@ -9,8 +9,10 @@
 | vote       | vote pertanyaan, vote jawaban                                                                                                                                                         | selesai          |                    |
 | reputasi   | kalkulasi reputasi dari hasil vote jawaban dan pertanyaan                                                                                                                             | selesai          |                    |
 
-## develop by
+##Cek for demo
+http://hidden-river-97884.herokuapp.com
 
+## develop by
 yudistirachma https://github.com/yudistirachma <br>
 badruti94 https://github.com/badruti94 <br>
 selinabuntara https://github.com/selinabuntara <br>
