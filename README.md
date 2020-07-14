@@ -16,3 +16,4 @@ http://hidden-river-97884.herokuapp.com
 yudistirachma https://github.com/yudistirachma <br>
 badruti94 https://github.com/badruti94 <br>
 selinabuntara https://github.com/selinabuntara <br>
+cek for original repository for detail : https://github.com/badruti94/final-project-40
